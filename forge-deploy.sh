@@ -11,13 +11,8 @@ git pull origin $FORGE_SITE_BRANCH
 # Pasang dependency PHP (tanpa pakej dev, dioptimumkan).
 $FORGE_COMPOSER install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-# SQLite disimpan DI LUAR folder release supaya data leaderboard
-# KEKAL walaupun selepas setiap deploy.
-DB_DIR="$HOME/algebra-db"
-mkdir -p "$DB_DIR"
-touch "$DB_DIR/database.sqlite"
-
 # Jalankan migration (cipta jadual 'scores' jika belum ada).
+# DB MySQL diuruskan oleh Forge melalui "Connect to database".
 php artisan migrate --force
 
 # Cache konfigurasi & laluan untuk prestasi.
